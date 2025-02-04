@@ -644,7 +644,9 @@ void slideshow_save_image(winwidget win)
 	if (opt.verbose)
 		fprintf(stderr, "saving image to filename '%s'\n", tmpname);
 
-	gib_imlib_save_image_with_error_return(win->im, tmpname, &err);
+	fprintf(stdout, "%s\n", FEH_FILE(win->file->data)->filename);
+	fflush(stdout);
+	err = 0; // TODO(aoeu): Find a better workaround for preventing error noise on stdout.
 
 	if (err)
 		feh_print_load_error(tmpname, win, err, LOAD_ERROR_IMLIB);
